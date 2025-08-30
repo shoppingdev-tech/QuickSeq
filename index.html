@@ -63,6 +63,14 @@
     footer a:hover {
       text-decoration: underline;
     }
+    #privacy-policy {
+      text-align: left;
+      max-width: 800px;
+      margin: auto;
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 12px;
+    }
   </style>
 </head>
 <body>
@@ -96,12 +104,9 @@
 
   <section>
     <h2>Privacy Policy</h2>
-    <p>
-      QuickSeq respects your privacy. We do not collect personal information. Some third-party services 
-      (like Google Play Services or ads) may collect data as described in their own policies.
-      <br><br>
-      <a href="privacy.html" class="btn">Read Full Privacy Policy</a>
-    </p>
+    <div id="privacy-policy">
+      <!-- Privacy Policy content will be loaded from privacy-policy.md -->
+    </div>
   </section>
 
   <footer>
@@ -109,5 +114,17 @@
     <p>Contact: <a href="mailto:yourname@example.com">yourname@example.com</a></p>
   </footer>
 
+  <!-- Load markdown and render -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    fetch("privacy-policy.md")
+      .then(response => response.text())
+      .then(text => {
+        document.getElementById("privacy-policy").innerHTML = marked.parse(text);
+      })
+      .catch(err => {
+        document.getElementById("privacy-policy").innerHTML = "<p>Privacy Policy could not be loaded.</p>";
+      });
+  </script>
 </body>
 </html>
